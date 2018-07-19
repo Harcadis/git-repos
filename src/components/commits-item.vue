@@ -1,21 +1,16 @@
 <template>
-  <div class="hello">
-    <ul>
-      <li v-for="commit in commits" :key="commit.name">
-         <p>{{ commit.sha }} - Build: {{ commit.build }} </p>
-         <p>by {{ commit.owner }} at {{ commit.createdAt }} </p>
-      </li>
-    </ul>
+  <div class="commit-item">
+    <p> {{ commit.sha }} - build: {{ commit.commit.message }} </p>
+    <p> by {{ commit.commit.author.name }} at {{ commit.commit.author.date }} </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Commits',
+  name: 'commits',
+  props: [ 'commit' ],
   data() {
     return {
-      commits: [],
-      commit: {sha: "",build: "",owner: "",createdAt: 0}
     };
   },
 };

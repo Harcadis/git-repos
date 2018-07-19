@@ -1,61 +1,61 @@
 <template>
   <div>
-    <h1>proyecto {{proyecto}} Cmmmits from {{ userName }}</h1>
-    <h2>Ramas</h2>
+    <h2> Proyecto {{proyect}} Commits from {{ username }}</h2>
+    <h3>Ramas </h3>
     <ul>
         <li v-for="branch in branches" :key="branch.name">
-            {{ branch.name }} <input type="radio">
+            {{ branch.name }} <input :checked="isFirst() === true" :id="branch.commit.sha" :value="[branch.name, branch.commit.sha]" type="radio" v-model="picked" >
         </li>
     </ul>
+    <commitList :sha="picked[1]" :username="username" :proyect="proyect" :branch="picked[0]"></commitList>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import commitList from './commits-list'
 
-const token = '?access_token=159a5ae1f09970af4ddb1916295a9f4eb4d52269'
-const url = 'https://github.com/repos/BorjaZarco/Full-Stack_TwitterBackEnd/branches'+token
+const username = "YuniorGlez";
+const proyect = "express-mongoose-jade-crm";
+const token = '?access_token=520389b369f0441ba88f20e86da46d1f68039a9a'
+const url = 'https://api.github.com/repos/'+username+'/'+proyect+'/branches'+token
+
+
 
 export default {
   name: 'Main',
   data() {
     return {
-      userName:"BorjaZarco",
-      proyecto: "Full-Stack_TwitterBackEnd",
-      branches: [
-          {
-              name: "master",
-              Commit: {
-                  sha: "",
-                  ur: "soy el mas guay jugando al pingpong"
-              } 
-          },
-          {
-              name: "dev",
-              Commit: {
-                  sha: "",
-                  ur: "soy el mas guay jugando al pingpong"
-              } 
-          }
-      ],
-      commitsURL: []
+      bool: true,
+      username: username,
+      proyect: proyect,
+      picked: "",
+      branches: [],
     }
   },
   created() {
-    // axios.get(url).then(res => (branchs = res)).catch(error)
+    axios.get(url)
+      .then(res => {
+        this.branches = res.data
+        })
+      .catch(error => console.log(error))
   },
   components: {
-    Commits
+    commitList
   },
   methods: {
-    getRepo(){
-
+    isFirst () {
+      if(this.bool) {
+        this.bool = false;
+        return true;
+      }
+      return false;
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -64,4 +64,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 </style>

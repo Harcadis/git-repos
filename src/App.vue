@@ -1,19 +1,18 @@
 <template>
   <div id="app">
+    <!--<Buscador/>-->
     <Main/>
-    <Commits/>
   </div>
 </template>
 
 <script>
 import Main from './components/Main'
-import Commits from './components/Commits'
+//import Buscador from './components/Buscador'
 
 export default {
   name: 'App',
   components: {
-    Main,
-    Commits
+    Main
   }
 };
 </script>
