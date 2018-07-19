@@ -13,7 +13,7 @@
 import axios from 'axios'
 import commitItem from './commits-item'
 
-const token = '?access_token=520389b369f0441ba88f20e86da46d1f68039a9a'
+const token = '?access_token=PUT_HERE_YOUR_TOKEN'
 const url = 'https://api.github.com/repos/YuniorGlez/express-mongoose-jade-crm/commits'+token
 
 export default {

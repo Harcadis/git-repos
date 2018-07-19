@@ -17,7 +17,7 @@ import commitList from './commits-list'
 
 const username = "YuniorGlez";
 const proyect = "express-mongoose-jade-crm";
-const token = '?access_token=520389b369f0441ba88f20e86da46d1f68039a9a'
+const token = '?access_token=PUT_HERE_YOUR_TOKEN'
 const url = 'https://api.github.com/repos/'+username+'/'+proyect+'/branches'+token
 
 
